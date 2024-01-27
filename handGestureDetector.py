@@ -133,6 +133,8 @@ mp_draw = mp.solutions.drawing_utils
 
 canvas = None
 prev_tip_position = None
+is_drawing_mode = False  # Initialize drawing mode as False
+
 # Colors for each finger
 colors = {
     "index": (10, 10, 247),  # Blue
@@ -165,22 +167,25 @@ while cap.isOpened():
             tip_position = (int(index_tip.x * frame.shape[1]), int(index_tip.y * frame.shape[0]))
 
             # Draw a line connecting the current tip to the previous tip
-            if prev_tip_position is not None:
+            if prev_tip_position is not None and is_drawing_mode:
                 cv2.line(canvas, prev_tip_position, tip_position, colors.get("index"), thickness=5)
 
             # Store the current tip position for the next iteration
             prev_tip_position = tip_position
 
-
     # Overlay the canvas on the frame
-    frame = cv2.addWeighted(frame, 1, canvas, 0.5, 0)
+    frame = cv2.addWeighted(frame, 0.5, canvas, 0.5, 0)
 
     # Display the resulting frame
     cv2.imshow('Hand Landmarks with Drawing', frame)
 
-    # Break the loop with the 'q' key
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    # Check for key presses
+    key = cv2.waitKey(1) & 0xFF
+    if key == ord('d'):  # Toggle drawing mode when 'd' key is pressed
+        is_drawing_mode = not is_drawing_mode
+    elif key == ord('q'):  # Break the loop with the 'q' key
         break
 
 cap.release()
 cv2.destroyAllWindows()
+
