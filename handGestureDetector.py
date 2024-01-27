@@ -96,10 +96,14 @@ while cap.isOpened():
     # File handling
     with open("hand_landmarks.txt", "a") as file:
         if results.multi_hand_landmarks:
-            for hand_landmarks in results.multi_hand_landmarks:
-                for i, lm in enumerate(hand_landmarks.landmark):
-                    file.write(f"Landmark {i}: x={lm.x}, y={lm.y}, z={lm.z}\n")
-                file.write("\n")
+            index_tip = results.multi_hand_landmarks[0].landmark[8]
+            file.write(f"Landmark 8: x={index_tip.x}, y={index_tip.y}, z={index_tip.z}\n")
+            file.write("\n")
+
+            # for hand_landmarks in results.multi_hand_landmarks:
+            #     for i, lm in enumerate(hand_landmarks.landmark):
+            #         file.write(f"Landmark {i}: x={lm.x}, y={lm.y}, z={lm.z}\n")
+            #     file.write("\n")
 
     # Display the resulting frame
     cv2.imshow('Hand Landmarks', frame)
