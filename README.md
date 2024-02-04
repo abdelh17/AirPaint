@@ -20,6 +20,7 @@ and clear the canvas. It's a fun way to interact with your computer using hand g
    - `g`: Set the color to green
    - `b`: Set the color to blue
    - `q`: Quit the application
+   - To toggle between drawing and non-drawing touch your index with your thumb
 
 
 ## How to Use
