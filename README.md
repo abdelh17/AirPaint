@@ -1,4 +1,4 @@
-# CameraPaint - Hand Gesture Drawing with OpenCV and MediaPipe
+# AirPaint - Hand Gesture Drawing with OpenCV and MediaPipe
 
 This project was created for a hackathon and allows you to draw and erase on the screen using 
 hand gestures detected by a camera. You can switch between drawing and erasing modes, change colors, 
